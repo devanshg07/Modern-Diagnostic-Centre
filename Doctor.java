@@ -28,13 +28,24 @@ public class Doctor {
         c.print("Enter Doctor's status (A for available, W for waiting, N for not available): ");
         this.status = c.readChar();
      
-         try (BufferedWriter writer1 = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("C:\\Users\\Devansh\\Downloads\\Doctor.txt", true), StandardCharsets.UTF_8))){
+        //this need to be fixed (no Hard Coded value)
+        String filePath = "C:\\Users\\Devansh\\Downloads\\Doctor.txt";
+        
+        try (BufferedWriter writer1 = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("C:\\Users\\Devansh\\Downloads\\Doctor.txt", true), StandardCharsets.UTF_8))){
+
+            if(new File(filePath).length() == 0){
+                writer1.write("Name \t" + "Gender \t" + "Qualifications \t" + "License Number \t" + "Status");
+                writer1.newLine();
+            //    writer1.write("--------------------");
+           //     writer1.newLine();
+            }
   
             // Append the patient information to the file
-              writer1.write("Doctor Name: " + docName + "\n" +  "Doctor Gender: " + this.docGender + "\n" + "Doctor Qualiications: " + this.docQualifications + "\n" + "Doctor's License Number: " + this.licNum + "\n" + "Doctor Status: " + this.status);
+            //writer1.write("Name \t" + "Gender \t" + "Qualifications \t" + "License Number \t" + "Status");
+              writer1.write("\n" + docName + "\t" + this.docGender + "\t" + this.docQualifications + "\t\t" + this.licNum + "\t\t" + this.status);
               writer1.newLine();
-              writer1.write("--------------------");
-              writer1.newLine();
+            //  writer1.write("--------------------");
+            //  writer1.newLine();
 
             c.println("Doctor's information written to file successfully.");
         } catch (IOException e) {

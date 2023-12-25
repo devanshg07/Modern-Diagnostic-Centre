@@ -11,7 +11,7 @@ public class LoginUser {
     }
 
     private String username;
-    private String password;
+    private char[] password;
     private int currentUser = 0;
     private int countAttempt = 0;
     
@@ -32,32 +32,52 @@ public class LoginUser {
         c.print("Please enter username: ");
         username = c.readLine();
         c.print("Please enter password: ");
-        password = c.readLine();
+        password = readPassword(c);
+        String passwString = new String(password);
+   
 
         try(BufferedReader reader3 = new BufferedReader(new FileReader("C:\\Users\\Devansh\\Downloads\\PasswordFile.txt"))){
             
                 String fileUserName;
                 String filePassword;
         
-                fileUserName = reader3.readLine();
-                filePassword = reader3.readLine();
-              
-                if(fileUserName.equals(username) && filePassword.equals(password)){
-                    
-                    c.println("Login Successful");
-                    currentUser += 1;
+                while ((fileUserName = reader3.readLine()) != null && (filePassword = reader3.readLine()) != null) {
+                    if (fileUserName.equals(username) && filePassword.trim().equals(passwString.trim())) {
+                        c.println("Login Successful");
+                        currentUser += 1;
+                        return;
+                    }
                 }
-                else{
-                    c.println("Login failed, please try again");
-                    countAttempt += 1;
-                    login();
-                  
-                }
-                reader3.close();
+    
+                c.println("Login failed, please try again");
+                countAttempt += 1;
+                login();
             
         } catch (Exception e) {
             c.println(e.getMessage());
         }
+    }
+
+    private char[] readPassword(Console c2) {
+        char[] password = new char[50];
+        int index = 0;
+        while (true){
+            char key = c.getChar();
+            if(key == '\n' || key == '\r'){
+                break;
+            }
+            else if (key == '\b' && index == 0) {
+                index -= 1;
+                c.println( "\b \b");                
+            }
+            else{
+                c.print("*");
+                password[index++] = key;
+            }
+        }
+        password[index] = '\0';
+        c.println();
+        return password;
     }
 
     public void logOut(){
