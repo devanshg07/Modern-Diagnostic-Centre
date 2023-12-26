@@ -21,6 +21,11 @@ public class Doctor {
         this.docName = c.readLine();
         c.print("Enter doctor's gender (M or F): ");
         this.docGender = c.readChar();
+        if(!(this.docGender == 'M' || this.docGender == 'F')){
+            c.println("Has to be male of female, try again.");
+            c.print("Enter doctor's gender (M or F): ");
+            this.docGender = c.readChar();
+        }
         c.print("Enter Doctor's qualifications: ");
         this.docQualifications = c.readLine();
         c.print("Enter doctor's license number: ");
@@ -28,24 +33,21 @@ public class Doctor {
         c.print("Enter Doctor's status (A for available, W for waiting, N for not available): ");
         this.status = c.readChar();
      
-        //this need to be fixed (no Hard Coded value)
-        String filePath = "C:\\Users\\Devansh\\Downloads\\Doctor.txt";
+       
+        final String filePath = "C:\\Users\\Devansh\\Downloads\\Doctor.txt";
         
         try (BufferedWriter writer1 = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("C:\\Users\\Devansh\\Downloads\\Doctor.txt", true), StandardCharsets.UTF_8))){
 
             if(new File(filePath).length() == 0){
                 writer1.write("Name \t" + "Gender \t" + "Qualifications \t" + "License Number \t" + "Status");
                 writer1.newLine();
-            //    writer1.write("--------------------");
-           //     writer1.newLine();
+                writer1.write("--------------------");
             }
   
             // Append the patient information to the file
-            //writer1.write("Name \t" + "Gender \t" + "Qualifications \t" + "License Number \t" + "Status");
               writer1.write("\n" + docName + "\t" + this.docGender + "\t" + this.docQualifications + "\t\t" + this.licNum + "\t\t" + this.status);
               writer1.newLine();
-            //  writer1.write("--------------------");
-            //  writer1.newLine();
+             
 
             c.println("Doctor's information written to file successfully.");
         } catch (IOException e) {
@@ -62,7 +64,7 @@ public class Doctor {
             }
             reader1.close();
         } catch (IOException e) {
-            c.println("There was a problem reading the information.");
+            c.println(e.getMessage());
         }
     }
 }

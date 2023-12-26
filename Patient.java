@@ -31,14 +31,23 @@ public class Patient {
         c.print("Enter patient's location: ");
         pLocation = c.readLine();
 
+        final String filePath = "C:\\Users\\Devansh\\Downloads\\Doctor.txt";
+
         try(BufferedWriter writer2 = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("C:\\Users\\Devansh\\Downloads\\Patient.txt"), StandardCharsets.UTF_8))){
-            writer2.write("Patient Name: " + this.pName + "\n" +  "Patient Age: " + this.pAge + "\n" + "Patient Gender: " + this.pGender + "\n" + "Patient's Blood Group: " + this.pBloodGroup + "\n" + "Patient's Phone Number: " + this.pContactNumber + "\n" + " Patient's Location: " + pLocation);
+
+            if(new File(filePath).length() == 0){
+                writer2.write(("Name \t" + "Age \t" + "Gender \t" + "Blood Group \t" + "Contact Number \t" + "Location "));
+                writer2.newLine();
+                writer2.write("--------------------");
+            }
+            writer2.write("\n" + pName + "\t" + pAge + "\t" + pGender + "\t" + pBloodGroup + "\t" + pContactNumber + "\t" + pLocation);
+            writer2.newLine();
 
             c.println("Doctor's information written to file successfully.");
              writer2.close();
 
         } catch (Exception e) {
-            c.println("There was a problem saving the information.");
+            c.println(e.getMessage());
         }
     }
 
@@ -49,10 +58,9 @@ public class Patient {
             while ((pInfo = reader2.readLine()) != null) {
                 c.println(pInfo);
             }
-            reader2.close();
-            
+            reader2.close();   
         } catch (Exception e) {
-            c.println("There was a problem reading the information.");
+            c.println(e.getMessage());
         }
     }
 }
