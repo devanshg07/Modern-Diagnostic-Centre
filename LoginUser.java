@@ -16,14 +16,61 @@ public class LoginUser {
     private char[] password;//password in character format all in an array
     private int currentUser = 0;//amount of users logged in
     private int countAttempt = 0;//amount of failed attempts when logging in
+
+    //getters and setters for the variables above
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public char[] getPassword() {
+        return password;
+    }
+
+    public void setPassword(char[] password) {
+        this.password = password;
+    }
+
+    public int getCurrentUser() {
+        return currentUser;
+    }
+
+    public void setCurrentUser(int currentUser) {
+        this.currentUser = currentUser;
+    }
+
+    public int getCountAttempt() {
+        return countAttempt;
+    }
+
+    public void setCountAttempt(int countAttempt) {
+        this.countAttempt = countAttempt;
+    }
+
     
+
+    public LoginUser(String username, char[] password, int currentUser, int countAttempt) {
+        this.username = username;
+        this.password = password;
+        this.currentUser = currentUser;
+        this.countAttempt = countAttempt;
+    }
+
     //this method will have the admin log in
     public void login(){
 
         //condition if the user tries to login more than 3 times
-        if(countAttempt >= 3){
+        if(countAttempt == 2){
+            c.println("One last chance");
+        }//if
+
+        if(countAttempt == 3){
             System.exit(0);//exits the whole database
         }//if
+
         if(currentUser > 1){
             c.println("Already logged in. ");//if admin logs in more than once
             return;//returns value to the main class

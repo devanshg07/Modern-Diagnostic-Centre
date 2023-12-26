@@ -7,16 +7,57 @@ public class Doctor {
 
     private Console c;//introduce console variable
 
+    //employ the console in this class
+    public Doctor(Console console) {
+        this.c = console;
+    }//console
+
     private String docName;//variable for doctor's name
     private char docGender;//variable for doctor's gender
     private String docQualifications;//variable for doctor's field
     private int licNum;//variable for doctor's license number
     private char status;//variable for doctor's status
 
-    //employ the console in this class
-    public Doctor(Console console) {
-        this.c = console;
-    }//console
+    //getter and setters for all of the variables above
+    public String getDocName() {
+        return docName;
+    }
+
+    public void setDocName(String docName) {
+        this.docName = docName;
+    }
+
+    public char getDocGender() {
+        return docGender;
+    }
+
+    public void setDocGender(char docGender) {
+        this.docGender = docGender;
+    }
+
+    public String getDocQualifications() {
+        return docQualifications;
+    }
+
+    public void setDocQualifications(String docQualifications) {
+        this.docQualifications = docQualifications;
+    }
+
+    public int getLicNum() {
+        return licNum;
+    }
+
+    public void setLicNum(int licNum) {
+        this.licNum = licNum;
+    }
+
+    public char getStatus() {
+        return status;
+    }
+
+    public void setStatus(char status) {
+        this.status = status;
+    }
 
     //the purpose of this method is for the admin to add a new doctor to their database which is a txt file in this context
     public void addDoctor() {
@@ -57,13 +98,13 @@ public class Doctor {
 
             //this if statement will check if its a blank file and in a table format will add categories
             if(new File(filePath).length() == 0){
-                writer1.write("Name \t" + "Gender \t" + "Qualifications \t" + "License Number \t" + "Status");//adds all categories
+                writer1.write("Name \t \t" + "Gender \t \t" + "Qualifications \t \t" + "License Number \t \t" + "Status");//adds all categories
                 writer1.newLine();
                 writer1.write("--------------------");//adds a line of highphens to seperate categories and information
             }//if
   
             // Append the doctor's info into the file
-              writer1.write("\n" + docName + "\t" + this.docGender + "\t" + this.docQualifications + "\t\t" + this.licNum + "\t\t" + this.status);
+              writer1.write("\n" + docName + "\t \t" + this.docGender + "\t \t" + this.docQualifications + "\t \t" + this.licNum + "\t\t" + this.status);
               writer1.newLine();//newline for new doctors for necesary spacing
              
 

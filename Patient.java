@@ -17,6 +17,64 @@ public class Patient {
     private String pBloodGroup;//patient blood group
     private String pContactNumber;//patient phone number
     private String pLocation;//patient location
+    private char condition;//patients condition (critical stable normal)
+
+    //getter and setter for the variables above
+    public String getpName() {
+        return pName;
+    }
+
+    public void setpName(String pName) {
+        this.pName = pName;
+    }
+
+    public int getpAge() {
+        return pAge;
+    }
+
+    public void setpAge(int pAge) {
+        this.pAge = pAge;
+    }
+
+    public char getpGender() {
+        return pGender;
+    }
+
+    public void setpGender(char pGender) {
+        this.pGender = pGender;
+    }
+
+    public String getpBloodGroup() {
+        return pBloodGroup;
+    }
+
+    public void setpBloodGroup(String pBloodGroup) {
+        this.pBloodGroup = pBloodGroup;
+    }
+
+    public String getpContactNumber() {
+        return pContactNumber;
+    }
+
+    public void setpContactNumber(String pContactNumber) {
+        this.pContactNumber = pContactNumber;
+    }
+
+    public String getpLocation() {
+        return pLocation;
+    }
+
+    public void setpLocation(String pLocation) {
+        this.pLocation = pLocation;
+    }
+
+    public char getCondition() {
+        return condition;
+    }
+
+    public void setCondition(char condition) {
+        this.condition = condition;
+    }
 
     //this method will ask for information, and will write it on a txt file
     public void addPatient(){
@@ -45,6 +103,16 @@ public class Patient {
 
         c.print("Enter patient's location: ");
         this.pLocation = c.readLine();//recieve location
+
+        c.print("Enter patient's condition (C for critical, S for stable, N for normal)");
+        this.condition = c.readChar();
+        
+        //this if statement is to make sure there arent any typos
+        if(!(this.condition == 'C'|| this.condition == 'S' || this.condition == 'N')){
+            c.println("That didn't work please try again");
+            c.print("Enter patient's condition (C for critical, S for stable, N for normal)");//asks again
+            this.condition = c.readChar();//valuates again
+        }
 
         final String filePath = "C:\\Users\\Devansh\\Downloads\\Patient.txt";//variable for the filepath in the computer with unchanging value
 

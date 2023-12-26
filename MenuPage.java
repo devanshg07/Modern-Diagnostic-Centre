@@ -43,6 +43,7 @@ class MenuPage {
             c.println("4: Show Patients");
             c.println("5: Return to Menu");
             c.println("6: Logout");
+            c.println("7: Show all available appointments");
             c.println("0: Exit");
 
             option = c.readInt();//variable for the switch case statement
@@ -92,6 +93,9 @@ class MenuPage {
                 //use the object to implement the moethod
                 loginUser.logOut();
                 break;
+
+                case 7:
+                
 
                 //if the input is not between numbers 0-6
                 default:
