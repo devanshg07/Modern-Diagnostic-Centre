@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import hsa.Console;
 
 //this class introduces the user to the website and gives them further instructions for the use.
@@ -11,6 +13,9 @@ class MenuPage {
 
     //this method will introduces the user then gives instructions
     public void welcome() {
+
+        ArrayList<Doctor> doctorList = new ArrayList<>();
+        ArrayList <Patient> patientsList = new ArrayList<>();
 
         int option = 0;//integer for the user's input for the switch case
 
@@ -34,6 +39,15 @@ class MenuPage {
         LoginUser loginUser = new LoginUser(c);//object to employ the login method
         loginUser.login();//employs the method from the other class after the introduction
 
+        //create object to implement method
+        Doctor doctor = new Doctor(c);
+
+        //create object to implement method
+        Patient patient = new Patient(c);
+
+        //create object to implement method
+        Appointment appointment = new Appointment(c);
+
         //this while loop will instruct the user
         while(true){
             //set of options for user input
@@ -47,7 +61,7 @@ class MenuPage {
             c.println("0: Exit");
 
             option = c.readInt();//variable for the switch case statement
-
+            
             //this switch case statement will conduct a variety of methods through the user's input
             switch (option) {
 
@@ -58,30 +72,22 @@ class MenuPage {
 
                 //add a doctor to the text file
                 case 1:
-                //create object to implement method
-                Doctor doctor1 = new Doctor(c);
-                doctor1.addDoctor();//add information to the file    
+                doctorList = doctor.addDoctor();//add information to the file    
                 break;
             
                 //show the admin doctor's information
-                case 2:
-                //create object to implement method
-                Doctor doctor2 = new Doctor(c);
-                doctor2.showDoctor();//read the file and then show everything to the user
+                case 2:                
+                doctor.showDoctor();//read the file and then show everything to the user
                 break;
 
                 //add a patient to the text file
                 case 3: 
-                //create object to implement method
-                Patient patient1 = new Patient(c);
-                patient1.addPatient();//add information the the file
+                patientsList = patient.addPatient();//add information the the file
                 break;
 
                 //show admin information about the patients
-                case 4:
-                //create object to implement method
-                Patient patient2 = new Patient(c);
-                patient2.showPatient();//read the file and then show everything to the user
+                case 4: 
+                patient.showPatient();//read the file and then show everything to the user
                 break;
 
                 //if the user wishes to return to the menu
@@ -95,8 +101,9 @@ class MenuPage {
                 break;
 
                 case 7:
-                
-
+                appointment.assignDoctor(patientsList, doctorList);
+                break;
+                       
                 //if the input is not between numbers 0-6
                 default:
                 c.println("Invalid please try again");

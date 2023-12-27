@@ -1,6 +1,7 @@
 import hsa.Console;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 
 //the purpose of this class is to conduct all methods related to patients
 public class Patient {
@@ -9,7 +10,7 @@ public class Patient {
     // Constructor to initialize the console
     public Patient(Console console) {
         this.c = console;
-    }
+    }//console
 
     private String pName;//patient name
     private int pAge;//patient age
@@ -17,7 +18,27 @@ public class Patient {
     private String pBloodGroup;//patient blood group
     private String pContactNumber;//patient phone number
     private String pLocation;//patient location
-    private char condition;//patients condition (critical stable normal)
+    private String condition;//patients condition (critical stable normal)
+
+    private final String nameLabel = "Name";
+    private final String ageNameLabel = "Age";
+    private final String genderNameLabel = "Gender";
+    private final String bloodGroupNameLabel = "Blood Group";
+    private final String contactNumberNameLabel = "Phone Number";
+    private final String conditionNameLabel = "Condition";
+
+    
+
+    public Patient(String pName, int pAge, char pGender, String pBloodGroup, String pContactNumber, String pLocation,
+            String condition) {
+        this.pName = pName;
+        this.pAge = pAge;
+        this.pGender = pGender;
+        this.pBloodGroup = pBloodGroup;
+        this.pContactNumber = pContactNumber;
+        this.pLocation = pLocation;
+        this.condition = condition;
+    }
 
     //getter and setter for the variables above
     public String getpName() {
@@ -68,16 +89,16 @@ public class Patient {
         this.pLocation = pLocation;
     }
 
-    public char getCondition() {
+    public String getCondition() {
         return condition;
     }
 
-    public void setCondition(char condition) {
+    public void setCondition(String condition) {
         this.condition = condition;
     }
 
     //this method will ask for information, and will write it on a txt file
-    public void addPatient(){
+    public ArrayList<Patient> addPatient(){
         c.print("Enter the patient name: ");
         this.pName = c.readLine();//recieve name
 
@@ -104,37 +125,59 @@ public class Patient {
         c.print("Enter patient's location: ");
         this.pLocation = c.readLine();//recieve location
 
-        c.print("Enter patient's condition (C for critical, S for stable, N for normal)");
-        this.condition = c.readChar();
-        
-        //this if statement is to make sure there arent any typos
-        if(!(this.condition == 'C'|| this.condition == 'S' || this.condition == 'N')){
-            c.println("That didn't work please try again");
-            c.print("Enter patient's condition (C for critical, S for stable, N for normal)");//asks again
-            this.condition = c.readChar();//valuates again
+        c.print("Enter patient's desired care (1. Heart, 2. Image Testing(Xray, etc), 3. Eye, 4. Brain, 5. Skin, 6. General)");
+        int conditionID = c.readInt();
+
+        if(conditionID == 1){
+            condition = "Heart";
+        } 
+        else if(conditionID == 2){
+            condition = "Image Testing";
+        }
+        else if(conditionID == 3){
+            condition = "Eye";
+        }
+        else if(conditionID == 4){
+            condition = "Brain";
+        }
+        else if(conditionID == 5){
+            condition = "Skin";
+        }
+        else{
+            condition = "General";
         }
 
+        ArrayList<Patient> patientList = new ArrayList<>();
+
+
+
+        Patient patient = new Patient(pName, pAge, pGender, pBloodGroup, pContactNumber, pLocation, condition);
+        patientList.add(patient);
+
+
+
         final String filePath = "C:\\Users\\Devansh\\Downloads\\Patient.txt";//variable for the filepath in the computer with unchanging value
+        //final String filePath = "Doctor.txt";
 
         //this try catch statement will use bufferedreader and will throw an error if an exception is rpesent
         try(BufferedWriter writer2 = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("C:\\Users\\Devansh\\Downloads\\Patient.txt"), StandardCharsets.UTF_8))){
 
             //this if statement will write the categories to file if the file turns out to be empty
             if(new File(filePath).length() == 0){
-                writer2.write(("Name \t" + "Age \t" + "Gender \t" + "Blood Group \t" + "Contact Number \t" + "Location "));
+                writer2.write(("Name \t" + "Age \t" + "Gender \t" + "Blood Group \t" + "Contact Number \t" + "Location \t" + "Condition"));
                 writer2.newLine();//gap
                 writer2.write("--------------------");//hiphen line
             }//if
 
-            writer2.write("\n" + pName + "\t" + pAge + "\t" + pGender + "\t" + pBloodGroup + "\t" + pContactNumber + "\t" + pLocation);//writes all information about the patients
+            writer2.write("\n" + pName + "\t" + pAge + "\t" + pGender + "\t" + pBloodGroup + "\t" + pContactNumber + "\t" + pLocation + "\t" + condition);//writes all information about the patients
             writer2.newLine();//gap line
 
             c.println("Doctor's information written to file successfully.");//writes if all goes well in this step
-            writer2.close();//close buffered writer
-
+    
         }/*try*/ catch (Exception e) {
             c.println(e.getMessage());//will tell the admin what the probem is if present
         }//catch
+        return patientList;
     }//method
 
     //this method will read from text file and will show admin the info

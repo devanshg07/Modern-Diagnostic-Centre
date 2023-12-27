@@ -1,0 +1,3 @@
+Name           Gender         Qualifs        License Num    Status         
+--------------------
+Devansh        M              Neurologist    1234           A              
