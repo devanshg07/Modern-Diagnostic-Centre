@@ -50,8 +50,6 @@ public class LoginUser {
         this.countAttempt = countAttempt;
     }
 
-    
-
     public LoginUser(String username, char[] password, int currentUser, int countAttempt) {
         this.username = username;
         this.password = password;

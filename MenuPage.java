@@ -99,10 +99,12 @@ class MenuPage {
                 //use the object to implement the moethod
                 loginUser.logOut();
                 break;
-
+       
                 case 7:
-                appointment.assignDoctor(patientsList, doctorList);
-                break;
+                patient.setConditionID();
+                String condition = patient.getCondition();
+                appointment.assignDoctor(condition);
+                    break;
                        
                 //if the input is not between numbers 0-6
                 default:
@@ -112,4 +114,3 @@ class MenuPage {
         }//while loop
     }//method
     }//class
-

@@ -14,11 +14,8 @@ public class Doctor {
     private int licNum;
     private char status;
 
-    String nameLABEL = "Name";
-    String genderNameLABEL = "Gender";
-    String qualificationsNameLABEL = "Qualifs";
-    String licenseNumNameLabel = "License Num";
-    String statusNameLABEL = "Status";
+    String[] label = {"Name", "Gender", "Quals", "License Num", "Status"};
+    String[] docInfo = new String[5];
 
     ArrayList<Patient> doctorPatientList= new ArrayList<>();
 
@@ -65,51 +62,73 @@ public class Doctor {
     }
 
     public ArrayList<Doctor> addDoctor() {
+
         c.print("Enter Doctor's name: ");
         this.docName = c.readLine();
+        docInfo[0] = this.docName;
 
         c.print("Enter doctor's gender (M or F): ");
         this.docGender = c.readChar();
 
         if (!(this.docGender == 'M' || this.docGender == 'F')) {
+            this.docInfo = null;
             c.println("That didn't work, try again.");
             c.print("Enter doctor's gender (M or F): ");
             this.docGender = c.readChar();
         }
+        docInfo[1] = String.valueOf(this.docGender);
 
-        c.print("Enter Doctor's qualifications (1.Cardiologist, 2.Radiologist, 3.Ophthalmologist, 4.Neurologist, 5.Dermatologist, 6.General Physician): ");
+
+        c.print("Enter Doctor's qualifications (1.Cardiologist, 2.Radiologist, 3.Optometrist, 4.Neurologist, 5.Dermatologist, 6.Physician): ");
         int docQualificationsID = c.readInt();
-        if(docQualificationsID == 1){
-            docQualifications = "Cardiologist";
-        } 
-        else if(docQualificationsID == 2){
-            docQualifications = "Radiologist";
+        switch (docQualificationsID) {
+
+            case 1:
+            this.docQualifications = "Cardiologist";
+            break;
+
+            case 2:
+            this.docQualifications = "Radiologist";
+            break;
+
+            case 3:
+            this.docQualifications = "Optometrist";
+            break;
+
+            case 4:
+            this.docQualifications = "Neurologist";
+            break;
+
+            case 5:
+            this.docQualifications = "Dermatologist";
+            break;
+
+            case 6:
+            this.docQualifications = "Physician";
+            break;
+        
+            default:
+            c.println("There was an error");
+            break;
         }
-        else if(docQualificationsID == 3){
-            docQualifications = "Ophthalmologist";
-        }
-        else if(docQualificationsID == 4){
-            docQualifications = "Neurologist";
-        }
-        else if(docQualificationsID == 5){
-            docQualifications = "Dermatologist";
-        }
-        else{
-            docQualifications = "General Physician";
-        }
+
+        docInfo[2] = this.docQualifications;
 
 
         c.print("Enter doctor's license number: ");
         this.licNum = c.readInt();
+        docInfo[3] = String.valueOf(this.licNum);
 
         c.print("Enter Doctor's status (A for available, W for waiting, N for not available): ");
         this.status = c.readChar();
 
         if (!(this.status == 'A' || this.status == 'W' || this.status == 'N')) {
+            this.status = (Character) null;
             c.println("That didn't work, try again. ");
             c.print("Enter Doctor's status (A for available, W for waiting, N for not available): ");
             this.status = c.readChar();
         }
+        docInfo[4] = String.valueOf(this.status);
 
         ArrayList<Doctor> doctorList = new ArrayList<>();
         Doctor doctor = new Doctor(docName, docQualifications, status);
@@ -119,21 +138,22 @@ public class Doctor {
                 new FileOutputStream(filePath, true), StandardCharsets.UTF_8))) {
 
             if (new File(filePath).length() == 0) {
-                writer1.write(String.format("%-15s", nameLABEL));
-                writer1.write(String.format("%-15s", genderNameLABEL));
-                writer1.write(String.format("%-15s", qualificationsNameLABEL));
-                writer1.write(String.format("%-15s", licenseNumNameLabel));
-                writer1.write(String.format("%-15s", statusNameLABEL));
+                
+                for(int i = 0; i < label.length; i++){
+                writer1.write(String.format("%-15s", label[i]));
+            }
                 writer1.newLine();
                 writer1.write("--------------------");
                 writer1.newLine();
             }
 
-            writer1.write(String.format("%-15s%-15s%-15s%-15s%-15s", this.docName, this.docGender,
-                    this.docQualifications, this.licNum , this.status));
-            writer1.newLine();
+            for(int j = 0; j < docInfo.length; j++){
+                writer1.write(String.format("%-15s",docInfo[j]));
+            }
 
+            writer1.newLine();
             c.println("Doctor's information written to file successfully.");
+            
         } catch (IOException e) {
             c.println(e.getMessage());
         }
