@@ -20,6 +20,7 @@ public class Patient {
     private String pLocation;//patient location
     private String condition;//patients condition (critical stable normal)
     private int conditionID;
+    static ArrayList<Patient> patientList = new ArrayList<>();
 
 
    public int getConditionID() {
@@ -102,12 +103,21 @@ String[] label = {"Name", "Age", "Gender", "Blood Grp", "Phone Num", "Location",
         this.condition = condition;
     }
 
+     public static ArrayList<Patient> getPatientList() {
+        return patientList;
+    }
+
+    public void setPatientList(ArrayList<Patient> patientList) {
+        this.patientList = patientList;
+    }
+
+
     //this method will ask for information, and will write it on a txt file
     public ArrayList<Patient> addPatient(){
         c.print("Enter the patient name: ");
         this.pName = c.readLine();//recieve name
         pInfo[0] = this.pName;
-        String filePath = this.pName + ".txt";
+        String filePath = "Patient.txt";
 
         c.print("Enter the patient age: ");
         this.pAge = c.readInt();//recieve age
@@ -174,14 +184,13 @@ String[] label = {"Name", "Age", "Gender", "Blood Grp", "Phone Num", "Location",
 
         pInfo[6] = this.condition;
 
-        ArrayList<Patient> patientList = new ArrayList<>();
 
         Patient patient = new Patient(pName, pAge, pGender, pBloodGroup, pContactNumber, pLocation, condition);
         patientList.add(patient);
-
+        c.println("does this work" + patientList.get(0).getpName());
 
         //this try catch statement will use bufferedreader and will throw an error if an exception is rpesent
-        try(BufferedWriter writer2 = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(filePath), StandardCharsets.UTF_8))){
+        try(BufferedWriter writer2 = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(filePath,true), StandardCharsets.UTF_8))){
 
             //this if statement will write the categories to file if the file turns out to be empty
             if(new File(filePath).length() == 0){
@@ -211,7 +220,7 @@ String[] label = {"Name", "Age", "Gender", "Blood Grp", "Phone Num", "Location",
     //this method will read from text file and will show admin the info
     public void showPatient(){
 
-        String filePath = this.pName + ".txt";
+        String filePath = "Patient.txt";
 
         //this try catch statement will use buffered reader and show the problems if present
         try (BufferedReader reader2 = new BufferedReader(new FileReader(filePath))){

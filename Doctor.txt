@@ -1,4 +1,0 @@
-Name           Gender         Quals          License Num    Status         
---------------------
-Arun Goel      M              Physician      123456         A              
-Devansh Goyal  M              Cardiologist   532617         A              

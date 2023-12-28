@@ -1,3 +1,14 @@
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.OutputStreamWriter;
+import java.nio.charset.StandardCharsets;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.List;
+
 import hsa.Console;
 
 public class Appointment {
@@ -56,5 +67,42 @@ public class Appointment {
         }
 
         c.println("No matching doctor found for condition: " + condition);
+    }
+
+    public void generateReport() {
+        // Assuming you have a method like getPatientList in your Patient class
+        List<Patient> patientList = Patient.getPatientList();
+        Patient patientName = new Patient(c);
+
+        // Assuming you have a method like showPatient that prints patient information
+        patientName.showPatient();
+
+        String pName;
+        c.print("Which patient's report to generate? ");
+        pName = c.readLine();
+
+        for (Patient patient : patientList) {
+            if (patient.getpName().equals(pName)) {
+                String filePath = pName + ".txt";
+                assignDoctor(patient.getCondition());
+
+                // Use try-with-resources to ensure the BufferedWriter is closed
+                try (BufferedWriter writer3 = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(filePath, true), StandardCharsets.UTF_8))) {
+                    writer3.write("Report for " + pName);
+                    writer3.newLine();
+                    writer3.write("Doctor Appointed: " + getDocName());
+                    writer3.newLine();
+                    writer3.write("Date: " + LocalDateTime.now());
+                    writer3.newLine();
+                    writer3.write("Patient Name: " + patient.getpName() + "\n" + "Patient Age: " + patient.getpAge() + "\n" + "Patient Gender: " + patient.getpGender() + "\n" + "Patient's Blood Group: " + patient.getpBloodGroup() + "\n" + "Patient's Phone Number: " + patient.getpContactNumber() + "\n" + "Patient's Location: " + patient.getpLocation() + "Patient Disease: " + patient.getCondition());
+                } catch (Exception e) {
+                    // Handle exceptions appropriately
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        // This line will print the name of the first patient in the list, adjust as needed
+        c.println(patientList.get(0).getpName());
     }
 }

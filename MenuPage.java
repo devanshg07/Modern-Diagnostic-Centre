@@ -55,9 +55,9 @@ class MenuPage {
             c.println("2: Show Doctors");
             c.println("3: Add Patients");
             c.println("4: Show Patients");
-            c.println("5: Return to Menu");
-            c.println("6: Logout");
-            c.println("7: Show all available appointments");
+            c.println("5: Show all available appointments");
+            c.println("6: Generate Report");
+            c.println("7: Logout");
             c.println("0: Exit");
 
             option = c.readInt();//variable for the switch case statement
@@ -92,19 +92,21 @@ class MenuPage {
 
                 //if the user wishes to return to the menu
                 case 5:
+                patient.setConditionID();
+                String condition = patient.getCondition();
+                appointment.assignDoctor(condition);
                 break;
 
                 //if the user wants to log out
                 case 6:
-                //use the object to implement the moethod
-                loginUser.logOut();
+                appointment.generateReport();
                 break;
+              
        
                 case 7:
-                patient.setConditionID();
-                String condition = patient.getCondition();
-                appointment.assignDoctor(condition);
-                    break;
+                 //use the object to implement the moethod
+                loginUser.logOut();
+                break;
                        
                 //if the input is not between numbers 0-6
                 default:
