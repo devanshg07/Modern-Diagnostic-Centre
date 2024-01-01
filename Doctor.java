@@ -2,7 +2,6 @@ import hsa.Console;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-
 public class Doctor {
 
     private Console c;
@@ -78,7 +77,6 @@ public class Doctor {
         }
         docInfo[1] = String.valueOf(this.docGender);
 
-
         c.print("Enter Doctor's qualifications (1.Cardiologist, 2.Radiologist, 3.Optometrist, 4.Neurologist, 5.Dermatologist, 6.Physician): ");
         int docQualificationsID = c.readInt();
         switch (docQualificationsID) {
@@ -114,7 +112,6 @@ public class Doctor {
 
         docInfo[2] = this.docQualifications;
 
-
         c.print("Enter doctor's license number: ");
         this.licNum = c.readInt();
         docInfo[3] = String.valueOf(this.licNum);
@@ -140,7 +137,7 @@ public class Doctor {
             if (new File(filePath).length() == 0) {
                 
                 for(int i = 0; i < label.length; i++){
-                writer1.write(String.format("%-15s", label[i]));
+                writer1.write(String.format("%-25s", label[i]));
             }
                 writer1.newLine();
                 writer1.write("--------------------");
@@ -148,7 +145,7 @@ public class Doctor {
             }
 
             for(int j = 0; j < docInfo.length; j++){
-                writer1.write(String.format("%-15s",docInfo[j]));
+                writer1.write(String.format("%-25s",docInfo[j]));
             }
 
             writer1.newLine();
@@ -177,6 +174,4 @@ public class Doctor {
     {
         doctorPatientList.add(patient);
     }
-
-    
 }

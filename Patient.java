@@ -7,6 +7,7 @@ import java.util.ArrayList;
 public class Patient {
     static Console c; // Declare the console
 
+
     // Constructor to initialize the console
     public Patient(Console console) {
         this.c = console;
@@ -187,7 +188,6 @@ String[] label = {"Name", "Age", "Gender", "Blood Grp", "Phone Num", "Location",
 
         Patient patient = new Patient(pName, pAge, pGender, pBloodGroup, pContactNumber, pLocation, condition);
         patientList.add(patient);
-        c.println("does this work" + patientList.get(0).getpName());
 
         //this try catch statement will use bufferedreader and will throw an error if an exception is rpesent
         try(BufferedWriter writer2 = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(filePath,true), StandardCharsets.UTF_8))){
@@ -197,7 +197,7 @@ String[] label = {"Name", "Age", "Gender", "Blood Grp", "Phone Num", "Location",
 
                 for(int i = 0; i < label.length; i++){
                     
-                writer2.write(String.format("%-15s", label[i]));
+                writer2.write(String.format("%-25s", label[i]));
                 }
                 writer2.newLine();
                 writer2.write("--------------------");//hiphen line
@@ -205,7 +205,7 @@ String[] label = {"Name", "Age", "Gender", "Blood Grp", "Phone Num", "Location",
             }//if
 
             for(int j = 0; j < label.length; j++){            
-            writer2.write(String.format("%-15s", pInfo[j]));
+            writer2.write(String.format("%-25s", pInfo[j]));
             }
             writer2.newLine();//gap line
 
@@ -229,6 +229,7 @@ String[] label = {"Name", "Age", "Gender", "Blood Grp", "Phone Num", "Location",
             //this while loop will write the info from the file to the console as long its not null
             while ((pInfo = reader2.readLine()) != null) {
                 c.println(pInfo);
+                c.println();
             }//while
 
         }/*try*/catch (Exception e) {

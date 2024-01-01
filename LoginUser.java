@@ -16,6 +16,8 @@ public class LoginUser {
     private char[] password;//password in character format all in an array
     private int currentUser = 0;//amount of users logged in
     private int countAttempt = 0;//amount of failed attempts when logging in
+    private final String userName = "admin";
+    private final String passWord = "12345";
 
     //getters and setters for the variables above
     public String getUsername() {
@@ -50,13 +52,6 @@ public class LoginUser {
         this.countAttempt = countAttempt;
     }
 
-    public LoginUser(String username, char[] password, int currentUser, int countAttempt) {
-        this.username = username;
-        this.password = password;
-        this.currentUser = currentUser;
-        this.countAttempt = countAttempt;
-    }
-
     //this method will have the admin log in
     public void login(){
 
@@ -83,16 +78,12 @@ public class LoginUser {
         String passwString = new String(password);//converts the array to a string
    
         //this try statement will employ a buffered reader to check if the password is accurate.
-        try(BufferedReader reader3 = new BufferedReader(new FileReader("C:\\Users\\Devansh\\Downloads\\PasswordFile.txt"))){
             
-                String fileUserName;//string for username present in file which is "Admin"
-                String filePassword;//string for passwrod present in file which is "12345"
+                final String userName = "admin";
+                final String passWord = "12345";
         
-                //this while loop will use the buffered reader object to read the usernames and password in the txt file
-                while ((fileUserName = reader3.readLine()) != null && (filePassword = reader3.readLine()) != null) {
-
                     //this if statement will check if the user input is the same as the required one being "Admin" for the username and "12345" for password
-                    if (fileUserName.equals(username) && filePassword.trim().equals(passwString.trim())) {
+                    if (userName.equals(username) && passWord.trim().equals(passwString.trim())) {
                         c.println("Login Successful");//lets the user know it went well
                         currentUser += 1;//adds 1 to the total amount of users
                         return;//returns to the main
@@ -103,11 +94,6 @@ public class LoginUser {
                 countAttempt += 1;//adds 1 to the amount of attempts in logging in
                 login();//implements the method once again
                 }//else
-                }//while
-
-            }/*try*/ catch (Exception e) {
-            c.println(e.getMessage());//tells user what the problem was if there was one
-        }//catch
     }//method
 
     //this method will convert the character array to a string and to keep the password confidential in the output screen

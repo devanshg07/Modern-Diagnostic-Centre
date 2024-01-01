@@ -19,21 +19,35 @@ class MenuPage {
 
         int option = 0;//integer for the user's input for the switch case
 
+        int halfWidth = 130/2;
+        int space = halfWidth-40;
+        String spacing = "%-" + space + "s";
+
         //moves the text twice
-        c.print("\t\t");
+        c.print(String.format(spacing,""));
+
         // This for loop will add intriguing highphens 40 times
         for (int i = 1; i <= 40; i++) {
             c.print("-");
         }//for
+
+        space = halfWidth - 39;
+        spacing = "%-" + space + "s";
+
         c.println();
-        c.println("\t\t"+ "Welcome to the Modern Diagnostic Centre");//tells user where they are
+        c.print(String.format(spacing,""));
+        c.println("Welcome to the Modern Diagnostic Centre");//tells user where they are
 
         //moves the text twice
-        c.print("\t\t");
+        space = halfWidth - 40;
+        spacing = "%-" + space + "s";
+        c.print(String.format(spacing,""));
+
         //this forloop will add another row 40 highphens 
         for (int j = 1; j <= 40; j++) {
             c.print("-");
         }//for
+        
         c.println();//a gap line
 
         LoginUser loginUser = new LoginUser(c);//object to employ the login method
@@ -55,9 +69,8 @@ class MenuPage {
             c.println("2: Show Doctors");
             c.println("3: Add Patients");
             c.println("4: Show Patients");
-            c.println("5: Show all available appointments");
-            c.println("6: Generate Report");
-            c.println("7: Logout");
+            c.println("5: Generate Report");
+            c.println("6: Logout");
             c.println("0: Exit");
 
             option = c.readInt();//variable for the switch case statement
@@ -92,18 +105,11 @@ class MenuPage {
 
                 //if the user wishes to return to the menu
                 case 5:
-                patient.setConditionID();
-                String condition = patient.getCondition();
-                appointment.assignDoctor(condition);
-                break;
-
-                //if the user wants to log out
-                case 6:
                 appointment.generateReport();
                 break;
               
        
-                case 7:
+                case 6:
                  //use the object to implement the moethod
                 loginUser.logOut();
                 break;

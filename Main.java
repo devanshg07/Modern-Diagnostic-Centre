@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.io.IOException;
 import hsa.Console;
 
@@ -8,8 +9,8 @@ public class Main {
     //this is the main class and its use is to execute the code with the use of methods
     public static void main(String[] args) throws IOException {
         //declare new console object
-        c = new Console();
-    
+        c = new Console(40,175);
+
         //create an object from the menu page class
         MenuPage intro = new MenuPage(c);
         //use the object to execute the welcome method

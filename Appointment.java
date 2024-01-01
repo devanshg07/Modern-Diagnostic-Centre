@@ -10,7 +10,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import hsa.Console;
-
 public class Appointment {
 
     private Console c; // introduce the console
@@ -20,18 +19,11 @@ public class Appointment {
         this.c = console;
     }// console
 
-    private String time; // string for appointment's time
     private String pName; // string for patient's name
     private String docName; // string for doctor name
 
     // getters and setters for all of the necessary variables
-    public String getTime() {
-        return time;
-    }
 
-    public void setTime(String time) {
-        this.time = time;
-    }
 
     public String getpName() {
         return pName;
@@ -94,7 +86,7 @@ public class Appointment {
                     writer3.newLine();
                     writer3.write("Date: " + LocalDateTime.now());
                     writer3.newLine();
-                    writer3.write("Patient Name: " + patient.getpName() + "\n" + "Patient Age: " + patient.getpAge() + "\n" + "Patient Gender: " + patient.getpGender() + "\n" + "Patient's Blood Group: " + patient.getpBloodGroup() + "\n" + "Patient's Phone Number: " + patient.getpContactNumber() + "\n" + "Patient's Location: " + patient.getpLocation() + "Patient Disease: " + patient.getCondition());
+                    writer3.write("Patient Name: " + patient.getpName() + "\n" + "Patient Age: " + patient.getpAge() + "\n" + "Patient Gender: " + patient.getpGender() + "\n" + "Patient's Blood Group: " + patient.getpBloodGroup() + "\n" + "Patient's Phone Number: " + patient.getpContactNumber() + "\n" + "Patient's Location: " + patient.getpLocation() + "\n" + "Patient Disease: " + patient.getCondition());
                 } catch (Exception e) {
                     // Handle exceptions appropriately
                     e.printStackTrace();
